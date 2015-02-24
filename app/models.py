@@ -1,4 +1,5 @@
 from . import db
+from marshmallow import schema 
 
 class User(db.Model):
   id = db.Column(db.Integer, primary_key=True)
@@ -17,3 +18,8 @@ class User(db.Model):
     
   def __repr__(self):
     return '<User %r>' % self.fisrt_name
+class UserSchema(schema):
+  formatted_name = fields.Method("format_name")
+  
+class Meta:
+  fields = ('fisrt_name','last_name','age','sex','image')
