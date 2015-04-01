@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>Welcome</title>
+    {% endif %}
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='JQ.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
+  </head>
+   <body>
+    <center>
+    <a href="/index"><input id="1" type="button" value="Home"></input></a>
+<a href="/profile"> <input id="2" type="button" value="Register"></input></a>
+   <a href="/profiles"><input id="3" type="button" value="Registred users"></input></a> 
+    <a href="/viewprofile"><input id="4" type="button" value="Profiles"></input></a>
+<a href="/games"><input id="4" type="button" value="Games"></input></a>
+</center>
+    <hr>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+        {% for message in messages %}
+          <li>{{ message }} </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+  </body>
+</html>
