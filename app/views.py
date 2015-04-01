@@ -1,4 +1,5 @@
 from app import app
+<<<<<<< HEAD
 from flask import render_template, request, redirect, url_for, flash, jsonify, session, send_file
 import os
 from os import path
@@ -10,8 +11,32 @@ from db_insert import *
 from . import db, models
 import time
 
+=======
+from flask import render_template, request, redirect, url_for
+from app import db
+from app.models import User
+from .forms import UserForm
+###
+# Routing for your application.
+###
+>>>>>>> 220afe0f976d85dc7a46f7cc89eb3ca0a859900f
+
+@app.route('/profile/', methods=["GET", "POST"])
+def profile():
+  form = UserForm(csrf_enabled=False)
+  if request.method == 'POST' and form.validate():
+    user = User(form.fisrt_name.data, form.last_name.data, form.age.data, form.sex.data,
+                    form.image.data)
+    db_session.add(user)
+    db.session.commit()
+  return render_template('profile.html', form=form)
+
+@app.route('/profiles/', method=["GET"])
+def profiles():
+  
 
 @app.route('/')
+<<<<<<< HEAD
 @app.route('/index')
 def index():
   return render_template('index.html', title="Home")
@@ -77,6 +102,34 @@ def profileView(userid):
                   'profile_add_on':u.profile_add_on,
                   'image':u.image
                  })
+=======
+def home():
+    """Render website's home page."""
+    return render_template('home.html')
+
+@app.route('/person')
+def person():
+  first_user = db.session.query(User).first()
+  return "fisrt_name: {}, last_name: {}, age: {}, sex: {}, image: {}".format(first_user.fisrt_name, first_user.last_name, first_user.age, first_user.sex, first_user.image)
+  
+
+@app.route('/about/')
+def about():
+    """Render the website's about page."""
+    return render_template('about.html')
+
+
+###
+# The functions below should be applicable to all Flask apps.
+###
+
+@app.route('/<file_name>.txt')
+def send_text_file(file_name):
+    """Send your static text file."""
+    file_dot_text = file_name + '.txt'
+    return app.send_static_file(file_dot_text)
+
+>>>>>>> 220afe0f976d85dc7a46f7cc89eb3ca0a859900f
 
 @app.after_request
 def add_header(response):
@@ -95,4 +148,8 @@ def page_not_found(error):
     return render_template('404.html', title='404'), 404
 
 if __name__ == '__main__':
+<<<<<<< HEAD
   app.run(debug=True, host='0.0.0.0', port=8080)
+=======
+    app.run(debug=True,host="0.0.0.0",port="8080")
+>>>>>>> 220afe0f976d85dc7a46f7cc89eb3ca0a859900f

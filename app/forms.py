@@ -1,4 +1,5 @@
 from flask.ext.wtf import Form
+<<<<<<< HEAD
 from flask.ext.uploads import *
 from wtforms import TextField, RadioField, DateField, FileField
 from wtforms.validators import DataRequired, Required, InputRequired
@@ -14,3 +15,17 @@ class Profile(Form):
   age = DateField('age', format='%Y-%m-%d', validators=[DataRequired()])
   image = FileField('image', validators=[FileRequired(), FileAllowed(['jpg', 'png'], 'Images only!')])
                                          
+=======
+from wtforms.fields import TextField
+# other fields include PasswordField
+from wtforms.validators import required
+
+class UserForm(Form):
+  fisrt_name = TextField('first_name', validators=[required()])
+  last_name = TextField('last_name', validators=[required()])
+  age = TextField('age', validators=[required()])
+  sex = TextField('sex', validators=[required()])
+  image = TextField('image', validators=[required()])
+  
+  
+>>>>>>> 220afe0f976d85dc7a46f7cc89eb3ca0a859900f
